@@ -18,4 +18,9 @@ class VoteApiRepository : VoteRepository {
             return Result.failure(e)
         }
     }
+
+    override suspend fun postVotes(optionId: Int): Result<GetVoteDTO> {
+        TODO("Not yet implemented")
+    }
+
 }
