@@ -20,7 +20,9 @@ fun RankeUCA_App() {
                     onNext = {backStack.add(Routes.Votes)})
             }
             entry<Routes.Votes> {
-                ResultScreen()
+                ResultScreen(
+                    onBack = {backStack.removeLastOrNull()}
+                )
             }
         },
     )

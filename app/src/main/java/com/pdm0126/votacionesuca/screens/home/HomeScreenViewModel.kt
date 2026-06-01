@@ -14,6 +14,8 @@ class HomeScreenViewModel : ViewModel() {
     private val VoteRepository: VoteRepository = VoteApiRepository()
     private val _votes = MutableStateFlow<List<Vote>>(emptyList())
     val votes = _votes.asStateFlow()
+    private val _refresh = MutableStateFlow(false)
+    val refreshing = _refresh.asStateFlow()
 
     init {
         loadVotes()
@@ -24,4 +26,13 @@ class HomeScreenViewModel : ViewModel() {
             VoteRepository.getVotes().onSuccess { votes -> _votes.value = votes }
         }
     }
+
+    fun onRefresh() {
+        viewModelScope.launch {
+            _refresh.value = true
+            VoteRepository.getVotes().onSuccess { votes -> _votes.value = votes }
+            _refresh.value = false
+        }
+    }
+
 }
