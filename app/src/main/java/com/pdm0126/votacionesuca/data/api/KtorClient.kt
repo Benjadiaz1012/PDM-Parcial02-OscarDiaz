@@ -1,6 +1,7 @@
 package com.pdm0126.votacionesuca.data.api
 
 import android.util.Log
+import com.pdm0126.votacionesuca.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,6 +15,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 object KtorClient {
+    private const val BASE_URL = "https://qjcxdvfzyseuvezacxsd.supabase.co/functions/v1/rankeuca/"
+    private const val APITOKEN = BuildConfig.API_TOKEN
     val client = HttpClient(OkHttp) {
         // Parseo automático de JSON
         install(ContentNegotiation) {
@@ -34,6 +37,8 @@ object KtorClient {
 
         // Configuración aplicada a todas las peticiones
         defaultRequest {
+            url(BASE_URL)
+            header(HttpHeaders.Authorization, "Bearer $APITOKEN")
             header(HttpHeaders.Accept, "application/json")
         }
     }

@@ -4,5 +4,5 @@ data class Vote(
     val id: Int,
     val name: String,
     val imageUrl: String,
-    val votes: String
+    val votes: Int
 )
